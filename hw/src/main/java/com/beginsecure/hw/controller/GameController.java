@@ -19,7 +19,7 @@ public class GameController {
             logger.info("Result: " + result);
             return result;
         } catch (Exception e) {
-            System.err.println("An error occurred during the game: " + e.getMessage());
+            logger.info("An error occurred during the game: " + e.getMessage());
             return "Error occurred during the game";
         }
     }
@@ -30,7 +30,7 @@ public class GameController {
             int randomIndex = (int) (Math.random() * allMoves.length);
             return allMoves[randomIndex];
         } catch (Exception e) {
-            System.err.println("An error occurred while generating a random move: " + e.getMessage());
+            logger.info("An error occurred while generating a random move: " + e.getMessage());
             throw e;
         }
     }
@@ -49,7 +49,7 @@ public class GameController {
                 return "Computer wins";
             }
         } catch (Exception e) {
-            System.err.println("An error occurred while determining the winner: " + e.getMessage());
+            logger.info("An error occurred while determining the winner: " + e.getMessage());
             throw e;
         }
     }
