@@ -1,0 +1,34 @@
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class GameControllerTest {
+    @Test
+    void testPlayGame() {
+        GameController gameController = new GameController();
+        gameController.logger = mock(org.slf4j.Logger.class);
+        String result = gameController.playGame("Rock");
+        assertNotNull(result);
+        verify(gameController.logger, times(3)).info(ArgumentMatchers.anyString());
+    }
+
+    @Test
+    void testGenerateRandomMove() {
+        GameController gameController = new GameController();
+        String randomMove = gameController.generateRandomMove();
+        assertNotNull(randomMove);
+        assertTrue(randomMove.equals("Rock") || randomMove.equals("Paper") || randomMove.equals("Scissors"));
+    }
+
+    @Test
+    void testDetermineWinner() {
+        GameController gameController = new GameController();
+        String result = gameController.determineWinner("Rock", "Scissors");
+        assertNotNull(result);
+        assertEquals("Player wins", result);
+    }
+}
